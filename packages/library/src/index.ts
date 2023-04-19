@@ -1,5 +1,5 @@
 interface Translation {
-    [key: string]: string | (() => string) | Translation;
+    [key: string]: string | ((...args: string[]) => string) | Translation;
 }
 
 type RemoveStringValues<T> = {
@@ -7,7 +7,13 @@ type RemoveStringValues<T> = {
 };
 
 export function defineBaseTranslation<T extends Translation>(translation: T) {
-    return convertToFunctions(translation);
+    return translation;
+}
+
+export function defineTranslation<T extends ReturnType<typeof defineBaseTranslation>>(
+    translation: T,
+) {
+    return translation;
 }
 
 function convertToFunctions<T extends Translation>(input: T): RemoveStringValues<T> {
@@ -23,3 +29,6 @@ function convertToFunctions<T extends Translation>(input: T): RemoveStringValues
         }),
     );
 }
+
+
+

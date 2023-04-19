@@ -16,6 +16,9 @@ importers:
 
   apps/vue-example:
     dependencies:
+      i18n-library:
+        specifier: workspace:*
+        version: link:../../packages/library
       vue:
         specifier: ^3.2.47
         version: 3.2.47
