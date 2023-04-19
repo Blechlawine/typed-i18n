@@ -1,5 +1,5 @@
 {
-    "name": "@typed-i18n/core",
+    "name": "@typed-i18n/adapter-vue",
     "version": "0.0.0",
     "scripts": {
         "build": "unbuild",
@@ -17,10 +17,13 @@
     "main": "./dist/index.cjs",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
-    "files": ["dist"],
+    "files": [
+        "dist"
+    ],
     "devDependencies": {
         "@types/node": "^18.11.17",
         "typescript": "^5.0.4",
-        "unbuild": "^1.2.1"
+        "unbuild": "^1.2.1",
+        "vue": "^3.2.47"
     }
 }

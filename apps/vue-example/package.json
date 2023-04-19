@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "vue": "^3.2.47",
-        "i18n-library": "workspace:*"
+        "@typed-i18n/core": "workspace:*"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.1.0",
