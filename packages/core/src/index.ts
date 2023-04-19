@@ -29,6 +29,3 @@ function convertToFunctions<T extends Translation>(input: T): RemoveStringValues
         }),
     );
 }
-
-
-
