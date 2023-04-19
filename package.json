@@ -1,0 +1,19 @@
+{
+    "name": "template-turbo",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev --parallel",
+        "lint": "turbo run lint",
+        "format": "rome check --apply-unsafe . && rome format --write ."
+    },
+    "devDependencies": {
+        "prettier": "latest",
+        "rome": "^12.0.0",
+        "turbo": "latest"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    }
+}
