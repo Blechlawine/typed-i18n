@@ -1,8 +1,8 @@
-interface Translation {
+export interface Translation {
     [key: string]: string | ((...args: string[]) => string) | Translation;
 }
 
-type RemoveStringValues<T> = {
+export type ConvertStringValues<T> = {
     [K in keyof T]: T[K] extends string ? () => string : T[K];
 };
 
@@ -16,7 +16,7 @@ export function defineTranslation<T extends ReturnType<typeof defineBaseTranslat
     return translation;
 }
 
-function convertToFunctions<T extends Translation>(input: T): RemoveStringValues<T> {
+export function convertToFunctions<T extends Translation>(input: T): ConvertStringValues<T> {
     return Object.fromEntries(
         Object.entries(input).map(([key, value]) => {
             if (typeof value === "string") {

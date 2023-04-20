@@ -1,5 +1,5 @@
 {
-    "name": "@typed-i18n/adapter-vue",
+    "name": "@typed-i18n/vue",
     "version": "0.0.0",
     "scripts": {
         "build": "unbuild",
@@ -20,10 +20,14 @@
     "files": [
         "dist"
     ],
+    "peerDependencies": {
+        "vue": "^3.2.47"
+    },
     "devDependencies": {
         "@types/node": "^18.11.17",
         "typescript": "^5.0.4",
         "unbuild": "^1.2.1",
-        "vue": "^3.2.47"
+        "vue": "^3.2.47",
+        "@typed-i18n/core": "workspace:*"
     }
 }

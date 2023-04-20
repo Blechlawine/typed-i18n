@@ -13,4 +13,4 @@ const i18n = createI18n({
     defaultLocale: "en"
 })
 
-createApp(App).mount("#app");
+createApp(App).use(i18n).mount("#app");

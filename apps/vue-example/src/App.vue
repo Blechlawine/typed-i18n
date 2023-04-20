@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
+import { useI18n } from "./locale";
+
+const { i18n } = useI18n();
 </script>
 
 <template>
@@ -11,6 +15,9 @@ import HelloWorld from "./components/HelloWorld.vue";
             <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
         </a>
     </div>
+    <p>
+        {{ i18n.hello() }}
+    </p>
     <HelloWorld msg="Vite + Vue" />
 </template>
 
