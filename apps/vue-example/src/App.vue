@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import { useI18n } from "./locale";
 
-const { i18n } = useI18n();
+const { i18n, locale, locales } = useI18n();
 </script>
 
 <template>
@@ -18,6 +18,9 @@ const { i18n } = useI18n();
     <p>
         {{ i18n.hello() }}
     </p>
+    <select v-model="locale">
+        <option v-for="l in locales" :key="l">{{ l }}</option>
+    </select>
     <HelloWorld msg="Vite + Vue" />
 </template>
 

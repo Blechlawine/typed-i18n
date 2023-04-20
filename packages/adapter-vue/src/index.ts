@@ -13,6 +13,7 @@ type ProvidedI18n<T> = {
     $t: ComputedRef<ConvertStringValues<T>>;
     $i18n: ComputedRef<ConvertStringValues<T>>;
     locale: ComputedRef<string>;
+    locales: string[];
 }
 
 export default function createI18n<T extends Translation>(options: Options<T>): Plugin {
@@ -32,6 +33,7 @@ export default function createI18n<T extends Translation>(options: Options<T>): 
                 $t: i18n,
                 $i18n: i18n,
                 locale,
+                locales: Object.keys(options.translations),
             });
         },
     };
