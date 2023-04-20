@@ -1,4 +1,4 @@
-import { defineBaseTranslation } from "i18n-library";
+import { defineBaseTranslation } from "@typed-i18n/core";
 
 const en = defineBaseTranslation({
     hello: "Hello world",
