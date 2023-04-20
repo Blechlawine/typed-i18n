@@ -20,6 +20,7 @@ export default function createI18n<T extends Translation>(options: Options<T>): 
     return {
         install(app) {
             // TODO: check if defaultLocale key is in translations
+            // TODO: move convertToFunctions call out of computed, to not run it everytime the locale changes
 
             const locale = ref(options.defaultLocale);
 

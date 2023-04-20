@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import { useI18n } from "./locale";
 
