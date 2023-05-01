@@ -1,6 +1,6 @@
 # Typed-i18n
 
-A typesafe internationalization library for vue, solid and svelte (soon).
+A typesafe internationalization library for vue, solid and svelte.
 
 # Tutorial
 <!-- TODO -->
