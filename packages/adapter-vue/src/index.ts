@@ -3,8 +3,8 @@ import type { ComputedRef, InjectionKey, Plugin, Ref } from "vue";
 import { computed, inject, ref } from "vue";
 export type * from "./types";
 
-type Options<T extends BaseTranslation> = {
-    translations: Record<string, T>;
+type Options<TTranslation extends BaseTranslation> = {
+    translations: Record<string, TTranslation>;
     defaultLocale: string;
 };
 
@@ -19,7 +19,9 @@ type ProvidedI18n<T extends BaseTranslation> = {
 
 const I18N_KEY = Symbol("i18n");
 
-export default function createI18n<T extends BaseTranslation>(options: Options<T>): Plugin {
+export default function createI18n<TTranslation extends BaseTranslation>(
+    options: Options<TTranslation>,
+): Plugin {
     const translations = Object.fromEntries(
         Object.entries(options.translations).map(([key, value]) => [
             key,
@@ -28,7 +30,14 @@ export default function createI18n<T extends BaseTranslation>(options: Options<T
     );
     return {
         install(app) {
-            // TODO: check if defaultLocale key is in translations
+            // TODO: show this error on the type level, not just at runtime
+            if (!(options.defaultLocale in translations)) {
+                throw new Error(
+                    `Unknown locale: "${options.defaultLocale}". Defined locales are: ${Object.keys(
+                        translations,
+                    ).join(", ")}`,
+                );
+            }
 
             const locale = ref(options.defaultLocale);
 
