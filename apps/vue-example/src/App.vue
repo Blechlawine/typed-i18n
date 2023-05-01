@@ -17,8 +17,8 @@ const { i18n, locale, locales } = useI18n();
     <p>
         {{ i18n.hello() }}
     </p>
-    <select v-model="locale">
-        <option v-for="l in locales" :key="l">{{ l }}</option>
+    <select v-model="$locale.value">
+        <option v-for="l in $locales" :key="l">{{ l }}</option>
     </select>
     <HelloWorld msg="Vite + Vue" />
 </template>

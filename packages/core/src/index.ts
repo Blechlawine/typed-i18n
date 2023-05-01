@@ -1,12 +1,12 @@
-export interface Translation {
-    [key: string]: string | ((...args: string[]) => string) | Translation;
+export interface BaseTranslation {
+    [key: string]: string | ((...args: string[]) => string) | BaseTranslation;
 }
 
 export type ConvertStringValues<T> = {
     [K in keyof T]: T[K] extends string ? () => string : T[K];
 };
 
-export function defineBaseTranslation<T extends Translation>(translation: T) {
+export function defineBaseTranslation<T extends BaseTranslation>(translation: T) {
     return translation;
 }
 
@@ -16,7 +16,7 @@ export function defineTranslation<T extends ReturnType<typeof defineBaseTranslat
     return translation;
 }
 
-export function convertToFunctions<T extends Translation>(input: T): ConvertStringValues<T> {
+export function convertToFunctions<T extends BaseTranslation>(input: T): ConvertStringValues<T> {
     return Object.fromEntries(
         Object.entries(input).map(([key, value]) => {
             if (typeof value === "string") {
