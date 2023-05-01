@@ -1,5 +1,5 @@
-import { ConvertStringValues, convertToFunctions, type Translation } from "@typed-i18n/core";
-import type { ComputedRef, Plugin } from "vue";
+import { ConvertStringValues, type Translation, convertToFunctions } from "@typed-i18n/core";
+import type { ComputedRef, Plugin, Ref } from "vue";
 import { computed, inject, ref } from "vue";
 
 type Options<T extends Translation> = {
@@ -12,19 +12,24 @@ type ProvidedI18n<T> = {
     t: ComputedRef<ConvertStringValues<T>>;
     $t: ComputedRef<ConvertStringValues<T>>;
     $i18n: ComputedRef<ConvertStringValues<T>>;
-    locale: ComputedRef<string>;
+    locale: Ref<string>;
     locales: string[];
-}
+};
 
 export default function createI18n<T extends Translation>(options: Options<T>): Plugin {
+    const translations = Object.fromEntries(
+        Object.entries(options.translations).map(([key, value]) => [
+            key,
+            convertToFunctions(value),
+        ]),
+    );
     return {
         install(app) {
             // TODO: check if defaultLocale key is in translations
-            // TODO: move convertToFunctions call out of computed, to not run it everytime the locale changes
 
             const locale = ref(options.defaultLocale);
 
-            const i18n = computed(() => convertToFunctions(options.translations[locale.value]));
+            const i18n = computed(() => translations[locale.value]);
 
             app.config.globalProperties.$t = i18n;
 
