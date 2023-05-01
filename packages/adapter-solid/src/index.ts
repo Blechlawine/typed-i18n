@@ -37,9 +37,9 @@ export function createI18n<TTranslation extends BaseTranslation>(
 
     if (!(options.defaultLocale in translations)) {
         throw new Error(
-            `Unknown locale: "${options.defaultLocale}". Defined locales are: ${Object.keys(
+            `Unknown locale: "${options.defaultLocale}". Defined locales are: "${Object.keys(
                 translations,
-            ).join(", ")}`,
+            ).join('", "')}"`,
         );
     }
 

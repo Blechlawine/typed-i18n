@@ -28,17 +28,17 @@ export default function createI18n<TTranslation extends BaseTranslation>(
             convertToFunctions(value),
         ]),
     );
+
+    // TODO: show this error on the type level, not just at runtime
+    if (!(options.defaultLocale in translations)) {
+        throw new Error(
+            `Unknown locale: "${
+                options.defaultLocale
+            }". Defined locales are: "${Object.keys(translations).join('", "')}"`,
+        );
+    }
     return {
         install(app) {
-            // TODO: show this error on the type level, not just at runtime
-            if (!(options.defaultLocale in translations)) {
-                throw new Error(
-                    `Unknown locale: "${options.defaultLocale}". Defined locales are: ${Object.keys(
-                        translations,
-                    ).join(", ")}`,
-                );
-            }
-
             const locale = ref(options.defaultLocale);
 
             const i18n = computed(() => translations[locale.value]);
