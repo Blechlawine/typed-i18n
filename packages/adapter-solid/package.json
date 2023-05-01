@@ -1,0 +1,33 @@
+{
+    "name": "@typed-i18n/solid",
+    "version": "0.0.0",
+    "scripts": {
+        "build": "unbuild",
+        "dev": "unbuild --stub",
+        "prepack": "unbuild"
+    },
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "devDependencies": {
+        "@types/node": "^18.16.0",
+        "typescript": "^5.0.4",
+        "unbuild": "^1.2.1",
+        "solid-js": "^1.7.3",
+        "@typed-i18n/core": "workspace:*"
+    },
+    "peerDependencies": {
+        "solid-js": "^1.7.3"
+    }
+}

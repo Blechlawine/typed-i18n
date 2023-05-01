@@ -1,12 +1,12 @@
-import { type BaseTranslation, ConvertStringValues, convertToFunctions } from "@typed-i18n/core";
+import {
+    type BaseTranslation,
+    ConvertStringValues,
+    I18nOptions,
+    convertToFunctions,
+} from "@typed-i18n/core";
 import type { ComputedRef, InjectionKey, Plugin, Ref } from "vue";
 import { computed, inject, ref } from "vue";
 export type * from "./types";
-
-type Options<TTranslation extends BaseTranslation> = {
-    translations: Record<string, TTranslation>;
-    defaultLocale: string;
-};
 
 type ProvidedI18n<T extends BaseTranslation> = {
     i18n: ConvertStringValues<T>;
@@ -20,7 +20,7 @@ type ProvidedI18n<T extends BaseTranslation> = {
 const I18N_KEY = Symbol("i18n");
 
 export default function createI18n<TTranslation extends BaseTranslation>(
-    options: Options<TTranslation>,
+    options: I18nOptions<TTranslation>,
 ): Plugin {
     const translations = Object.fromEntries(
         Object.entries(options.translations).map(([key, value]) => [

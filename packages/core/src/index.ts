@@ -6,6 +6,11 @@ export type ConvertStringValues<T> = {
     [K in keyof T]: T[K] extends string ? () => string : T[K];
 };
 
+export type I18nOptions<TTranslation extends BaseTranslation> = {
+    translations: Record<string, TTranslation>;
+    defaultLocale: string;
+};
+
 export function defineBaseTranslation<T extends BaseTranslation>(translation: T) {
     return translation;
 }
