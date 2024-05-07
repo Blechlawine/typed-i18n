@@ -1,6 +1,6 @@
 {
     "name": "@typed-i18n/core",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "scripts": {
         "build": "unbuild",
         "dev": "unbuild --stub",
