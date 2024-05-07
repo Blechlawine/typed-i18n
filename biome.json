@@ -1,0 +1,28 @@
+{
+    "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "formatter": {
+        "indentWidth": 4,
+        "indentStyle": "space",
+        "lineWidth": 120,
+        "formatWithErrors": true
+    },
+    "files": {
+        "ignore": ["node_modules", "dist", ".git", "*.vue", ".solid", ".svelte-kit"],
+        "ignoreUnknown": true
+    },
+    "linter": {
+        "rules": {
+            "a11y": {
+                "useKeyWithClickEvents": "off"
+            }
+        }
+    },
+    "organizeImports": {
+        "enabled": true
+    },
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    }
+}

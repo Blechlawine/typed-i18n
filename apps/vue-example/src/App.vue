@@ -15,10 +15,10 @@ const { i18n, locale, locales } = useI18n();
         </a>
     </div>
     <p>
-        {{ i18n.hello() }}
+        {{ i18n().hello() }}
     </p>
-    <select v-model="$locale.value">
-        <option v-for="l in $locales" :key="l">{{ l }}</option>
+    <select v-model="locale">
+        <option v-for="l in locales" :key="l">{{ l }}</option>
     </select>
     <HelloWorld msg="Vite + Vue" />
 </template>
@@ -30,9 +30,11 @@ const { i18n, locale, locales } = useI18n();
     will-change: filter;
     transition: filter 300ms;
 }
+
 .logo:hover {
     filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
     filter: drop-shadow(0 0 2em #42b883aa);
 }

@@ -2,18 +2,19 @@
     "name": "typed-i18n",
     "version": "0.0.0",
     "private": true,
+    "workspaces": ["apps/*", "packages/*"],
     "scripts": {
-        "build": "turbo run build",
-        "dev": "turbo run dev --parallel",
-        "lint": "turbo run lint",
-        "format": "rome check --apply-unsafe . && rome format --write ."
+        "dev": "bun --filter '*' dev",
+        "lint": "bun --filter '*' lint",
+        "format": "biome check --apply-unsafe . && biome format --write ."
     },
     "devDependencies": {
-        "prettier": "latest",
-        "rome": "^12.0.0",
-        "turbo": "^1.10.12"
+        "@biomejs/biome": "^1.7.3",
+        "@types/bun": "^1.1.1"
     },
-    "engines": {
-        "node": ">=16.0.0"
+    "module": "index.ts",
+    "type": "module",
+    "peerDependencies": {
+        "typescript": "^5.0.0"
     }
 }

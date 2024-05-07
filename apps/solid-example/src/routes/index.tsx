@@ -8,15 +8,14 @@ export default function Home() {
 
     return (
         <main>
-            <Title>Hello World</Title>
-            <h1>{i18n().hello()}</h1>
+            <Title>{i18n()("hello")()}</Title>
+            <h1>{i18n()().hello()}</h1>
             <select onInput={(e) => setLocale(e.currentTarget.value)}>
                 <For each={locales}>{(locale) => <option value={locale}>{locale}</option>}</For>
             </select>
             <Counter />
             <p>
-                Visit <a href="https://start.solidjs.com">start.solidjs.com</a> to learn how to
-                build SolidStart apps.
+                Visit <a href="https://start.solidjs.com">start.solidjs.com</a> to learn how to build SolidStart apps.
             </p>
         </main>
     );

@@ -1,40 +1,33 @@
-import {
-    type BaseTranslation,
-    ConvertStringValues,
-    I18nOptions,
-    convertToFunctions,
-} from "@typed-i18n/core";
-import type { ComputedRef, InjectionKey, Plugin, Ref } from "vue";
+import { type BaseTranslation, type I18n, type I18nOptions, convertToFunctions, indexed } from "@typed-i18n/core";
+import type { ComputedRef, Plugin, Ref } from "vue";
 import { computed, inject, ref } from "vue";
-export type * from "./types";
 
 type ProvidedI18n<T extends BaseTranslation> = {
-    i18n: ConvertStringValues<T>;
-    t: ComputedRef<ConvertStringValues<T>>;
-    $t: ComputedRef<ConvertStringValues<T>>;
-    $i18n: ComputedRef<ConvertStringValues<T>>;
+    i18n: ComputedRef<I18n<T>>;
+    t: ComputedRef<I18n<T>>;
+    $t: ComputedRef<I18n<T>>;
+    $i18n: ComputedRef<I18n<T>>;
     locale: Ref<string>;
     locales: string[];
+    defaultLocale: string;
 };
 
 const I18N_KEY = Symbol("i18n");
 
-export default function createI18n<TTranslation extends BaseTranslation>(
-    options: I18nOptions<TTranslation>,
-): Plugin {
+export function createI18n<TTranslation extends BaseTranslation>(options: I18nOptions<TTranslation>): Plugin {
     const translations = Object.fromEntries(
-        Object.entries(options.translations).map(([key, value]) => [
+        Object.entries<TTranslation>(options.translations).map(([key, value]) => [
             key,
-            convertToFunctions(value),
+            indexed(convertToFunctions(value)),
         ]),
     );
 
     // TODO: show this error on the type level, not just at runtime
     if (!(options.defaultLocale in translations)) {
         throw new Error(
-            `Unknown locale: "${
-                options.defaultLocale
-            }". Defined locales are: "${Object.keys(translations).join('", "')}"`,
+            `Unknown locale: "${options.defaultLocale}". Defined locales are: "${Object.keys(translations).join(
+                '", "',
+            )}"`,
         );
     }
     return {
@@ -55,7 +48,8 @@ export default function createI18n<TTranslation extends BaseTranslation>(
                 $t: i18n,
                 $i18n: i18n,
                 locale,
-                locales: Object.keys(options.translations),
+                locales: Object.keys(translations),
+                defaultLocale: options.defaultLocale,
             });
         },
     };

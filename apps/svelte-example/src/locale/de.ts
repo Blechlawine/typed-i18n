@@ -1,5 +1,5 @@
-import type { Translation } from "./en";
 import { defineTranslation } from "@typed-i18n/core";
+import type { Translation } from "./en";
 
 const de = defineTranslation<Translation>({
     hello: "Hallo Welt",

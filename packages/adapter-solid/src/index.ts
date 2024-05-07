@@ -1,11 +1,6 @@
+import { type BaseTranslation, type I18n, type I18nOptions, convertToFunctions, indexed } from "@typed-i18n/core";
 import {
-    type BaseTranslation,
-    type ConvertStringValues,
-    type I18nOptions,
-    convertToFunctions,
-} from "@typed-i18n/core";
-import {
-    Accessor,
+    type Accessor,
     type ParentComponent,
     createComponent,
     createContext,
@@ -14,36 +9,31 @@ import {
     useContext,
 } from "solid-js";
 
-export function createI18n<TTranslation extends BaseTranslation>(
-    options: I18nOptions<TTranslation>,
-) {
+export function createI18n<TTranslation extends BaseTranslation>(options: I18nOptions<TTranslation>) {
     const I18nContext = createContext(
         {} as {
             locale: Accessor<string>;
             setLocale: (locale: string) => void;
-            i18n: Accessor<ConvertStringValues<TTranslation>>;
+            i18n: Accessor<I18n<TTranslation>>;
             locales: string[];
         },
     );
 
     const translations = Object.fromEntries(
-        Object.entries(options.translations).map(([key, value]) => [
-            key,
-            convertToFunctions(value),
-        ]),
+        Object.entries(options.translations).map(([key, value]) => [key, indexed(convertToFunctions(value))]),
     );
 
     const locales = Object.keys(translations);
 
     if (!(options.defaultLocale in translations)) {
         throw new Error(
-            `Unknown locale: "${options.defaultLocale}". Defined locales are: "${Object.keys(
-                translations,
-            ).join('", "')}"`,
+            `Unknown locale: "${options.defaultLocale}". Defined locales are: "${Object.keys(translations).join(
+                '", "',
+            )}"`,
         );
     }
 
-    const TypedI18n: ParentComponent<{}> = (props) => {
+    const TypedI18n: ParentComponent = (props) => {
         const [locale, setLocale] = createSignal(options.defaultLocale);
 
         const i18n = createMemo(() => {
