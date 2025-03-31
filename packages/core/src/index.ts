@@ -1,6 +1,5 @@
 import type * as H from "hotscript";
 
-// Code from https://github.com/Blechlawine/typed-i18n/blob/main/packages/core/src/index.ts
 export type BaseTranslation = Record<string, BaseTranslationValue>;
 
 type BaseTranslationValue =
@@ -63,4 +62,13 @@ export function indexed<T extends { [key: string]: any }>(input: T): IndexFuncti
         }
         return result;
     }) as IndexFunction<T>;
+}
+
+export function createTranslation<TTranslation extends BaseTranslation>(options: I18nOptions<TTranslation>) {
+    return Object.fromEntries(
+        Object.entries<TTranslation>(options.translations).map(([key, value]) => [
+            key,
+            indexed(convertToFunctions(value)),
+        ]),
+    );
 }

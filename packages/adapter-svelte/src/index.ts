@@ -1,17 +1,14 @@
 import {
     type BaseTranslation,
     type I18nOptions,
-    convertToFunctions,
-    indexed,
     type ConvertStringValues,
     type IndexFunction,
+    createTranslation,
 } from "@typed-i18n/core";
 import { derived, writable } from "svelte/store";
 
 export function createI18n<TTranslation extends BaseTranslation>(options: I18nOptions<TTranslation>) {
-    const translations = Object.fromEntries(
-        Object.entries(options.translations).map(([key, value]) => [key, indexed(convertToFunctions(value))]),
-    );
+    const translations = createTranslation<TTranslation>(options);
     const locales = Object.keys(translations);
 
     if (!(options.defaultLocale in translations)) {

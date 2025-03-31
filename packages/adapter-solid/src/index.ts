@@ -1,4 +1,4 @@
-import { type BaseTranslation, type I18n, type I18nOptions, convertToFunctions, indexed } from "@typed-i18n/core";
+import { type BaseTranslation, type I18n, type I18nOptions, createTranslation } from "@typed-i18n/core";
 import {
     type Accessor,
     type ParentComponent,
@@ -19,9 +19,7 @@ export function createI18n<TTranslation extends BaseTranslation>(options: I18nOp
         },
     );
 
-    const translations = Object.fromEntries(
-        Object.entries(options.translations).map(([key, value]) => [key, indexed(convertToFunctions(value))]),
-    );
+    const translations = createTranslation<TTranslation>(options);
 
     const locales = Object.keys(translations);
 

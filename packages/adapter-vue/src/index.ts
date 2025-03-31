@@ -1,4 +1,4 @@
-import { type BaseTranslation, type I18n, type I18nOptions, convertToFunctions, indexed } from "@typed-i18n/core";
+import { type BaseTranslation, type I18n, type I18nOptions, createTranslation } from "@typed-i18n/core";
 import type { ComputedRef, Plugin, Ref } from "vue";
 import { computed, inject, ref } from "vue";
 
@@ -15,12 +15,7 @@ type ProvidedI18n<T extends BaseTranslation> = {
 const I18N_KEY = Symbol("i18n");
 
 export function createI18n<TTranslation extends BaseTranslation>(options: I18nOptions<TTranslation>): Plugin {
-    const translations = Object.fromEntries(
-        Object.entries<TTranslation>(options.translations).map(([key, value]) => [
-            key,
-            indexed(convertToFunctions(value)),
-        ]),
-    );
+    const translations = createTranslation<TTranslation>(options);
 
     // TODO: show this error on the type level, not just at runtime
     if (!(options.defaultLocale in translations)) {
