@@ -7,10 +7,6 @@ A typesafe internationalization library for Vue, Solid, Svelte and Astro (soon).
 
 COMING SOON
 
-# License
-<!-- TODO -->
-COMING SOON
-
 # Credits
 
 I was inspired by these projects:
